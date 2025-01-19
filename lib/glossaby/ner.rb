@@ -37,8 +37,7 @@ module Glossaby
       @doc = nlp.read(preprocessor.process)
     end
 
-    def run
-      rows = []
+    def collect_keyword
       keyword = {}
       doc.ents.each do |ent|
         if keyword.key?(ent.text)
@@ -46,15 +45,16 @@ module Glossaby
         else
           next if IGNORED_LABELS.include? ent.label
 
-          keyword[ent.text] = {
-            count: 1,
-            label: ent.label
-          }
+          keyword[ent.text] = { count: 1, label: ent.label }
         end
       end
+      keyword
+    end
 
+    def run
+      rows = []
       headings = %w[text label count]
-      keyword.keys.map do |k|
+      collect_keyword.keys.map do |k|
         v = keyword[k]
         rows << [k, v[:label], v[:count]]
       end
