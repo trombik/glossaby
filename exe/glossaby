@@ -5,6 +5,7 @@ require "glossaby"
 require "commander"
 
 module Glossaby
+  # Implements CLI interface.
   class CLI
     include Commander::Methods
 

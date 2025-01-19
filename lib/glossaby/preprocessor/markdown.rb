@@ -6,6 +6,7 @@ require "pathname"
 
 module Glossaby
   module Preprocessor
+    # Implements Makrdown Preprocessor
     class Markdown
       def initialize(file)
         @file = Pathname(file)

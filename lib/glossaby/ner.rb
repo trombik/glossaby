@@ -7,8 +7,10 @@ require "pathname"
 require "glossaby/preprocessor/markdown"
 
 module Glossaby
+  # A class that implements extracting named entities with Named Entity
+  # Recognition.
   class NER
-    IGNORED_LABELS = %w[CARDINAL DATE]
+    IGNORED_LABELS = %w[CARDINAL DATE].freeze
 
     def initialize(opts)
       @file = Pathname opts[:args].first
@@ -52,7 +54,8 @@ module Glossaby
       end
 
       headings = %w[text label count]
-      keyword.each do |k, v|
+      keyword.keys.map do |k|
+        v = keyword[k]
         rows << [k, v[:label], v[:count]]
       end
       table = Terminal::Table.new rows: rows.sort { |a, b| b[2] <=> a[2] }, headings: headings
