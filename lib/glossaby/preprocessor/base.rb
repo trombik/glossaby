@@ -4,6 +4,7 @@ require "pathname"
 
 module Glossaby
   module Preprocessor
+    # the base class for Glossaby::Preprocessor
     class Base
       def initialize(file)
         @file = Pathname(file)

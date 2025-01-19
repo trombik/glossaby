@@ -2,6 +2,7 @@
 
 require_relative "lib/glossaby/version"
 
+# rubocop:disable Metrics/BlockLength
 Gem::Specification.new do |spec|
   spec.name = "glossaby"
   spec.version = Glossaby::VERSION
@@ -43,3 +44,4 @@ Gem::Specification.new do |spec|
   # guide at: https://bundler.io/guides/creating_gem.html
   spec.metadata["rubygems_mfa_required"] = "true"
 end
+# rubocop:enable Metrics/BlockLength

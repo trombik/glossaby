@@ -9,6 +9,7 @@ module Glossaby
   class CLI
     include Commander::Methods
 
+    # rubocop:disable Metrics/MethodLength
     def run
       program :name, "glossaby"
       program :version, Glossaby::VERSION
@@ -24,6 +25,7 @@ module Glossaby
       end
 
       run!
+      # rubocop:enable Metrics/MethodLength
     end
   end
 end
