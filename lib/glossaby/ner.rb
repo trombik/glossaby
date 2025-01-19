@@ -54,7 +54,8 @@ module Glossaby
     def run
       rows = []
       headings = %w[text label count]
-      collect_keyword.keys.map do |k|
+      keyword = collect_keyword
+      keyword.keys.map do |k|
         v = keyword[k]
         rows << [k, v[:label], v[:count]]
       end
