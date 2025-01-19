@@ -11,6 +11,13 @@ Welcome to your new gem! In this directory, you'll find the files you need to be
 * [ ] Create a histogram of frequently appearing noun phrases
 * [ ] Create a histogram of frequently appearing expressions
 
+## Preprocessors
+
+* [x] Markdown
+* [x] PDF
+* [ ] HTML
+* [ ] Word
+
 ## Installation
 
 TODO: Replace `UPDATE_WITH_YOUR_GEM_NAME_IMMEDIATELY_AFTER_RELEASE_TO_RUBYGEMS_ORG` with your gem name right after releasing it to RubyGems.org. Please do not do it earlier due to security reasons. Alternatively, replace this section with instructions to install your gem from git if you don't plan to release to RubyGems.org.

@@ -5,6 +5,7 @@ require "ruby-spacy"
 require "terminal-table"
 require "pathname"
 require "glossaby/preprocessor/markdown"
+require "glossaby/preprocessor/pdf"
 
 module Glossaby
   # A class that implements extracting named entities with Named Entity
@@ -28,6 +29,8 @@ module Glossaby
       @preprocessor = case @file.extname
                       when ".md"
                         Glossaby::Preprocessor::Markdown.new(@file)
+                      when ".pdf"
+                        Glossaby::Preprocessor::PDF.new(@file)
                       end
     end
 
