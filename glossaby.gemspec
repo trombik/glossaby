@@ -34,10 +34,12 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   # Uncomment to register a new dependency of your gem
+  spec.add_dependency "commander", "~> 5.0.0"
+  spec.add_dependency "redcarpet", "~> 3.6.0"
   spec.add_dependency "ruby-spacy", "~> 0.2.3"
   spec.add_dependency "terminal-table", "~> 3.0.2"
-  spec.add_dependency "commander", "~> 5.0.0"
 
   # For more information and examples about making a new gem, check out our
   # guide at: https://bundler.io/guides/creating_gem.html
+  spec.metadata["rubygems_mfa_required"] = "true"
 end
