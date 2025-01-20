@@ -3,6 +3,7 @@ PATH
   specs:
     glossaby (0.1.0)
       commander (~> 5.0.0)
+      nokogiri (~> 1.18.2)
       pdf-reader (~> 2.13.0)
       redcarpet (~> 3.6.0)
       ruby-spacy (~> 0.2.3)
@@ -32,9 +33,13 @@ GEM
     json (2.9.1)
     language_server-protocol (3.17.0.3)
     logger (1.6.5)
+    mini_portile2 (2.8.8)
     multipart-post (2.4.1)
     net-http (0.6.0)
       uri
+    nokogiri (1.18.2)
+      mini_portile2 (~> 2.8.2)
+      racc (~> 1.4)
     numpy (0.4.0)
       pycall (>= 1.2.0.beta1)
     parallel (1.26.3)

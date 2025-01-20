@@ -6,6 +6,7 @@ require "terminal-table"
 require "pathname"
 require "glossaby/preprocessor/markdown"
 require "glossaby/preprocessor/pdf"
+require "glossaby/preprocessor/html"
 
 module Glossaby
   # A class that implements extracting named entities with Named Entity
@@ -31,6 +32,8 @@ module Glossaby
                         Glossaby::Preprocessor::Markdown.new(@file)
                       when ".pdf"
                         Glossaby::Preprocessor::PDF.new(@file)
+                      when ".html", ".htm"
+                        Glossaby::Preprocessor::HTML.new(@file)
                       end
     end
 

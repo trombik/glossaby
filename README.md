@@ -15,7 +15,7 @@ Welcome to your new gem! In this directory, you'll find the files you need to be
 
 * [x] Markdown
 * [x] PDF
-* [ ] HTML
+* [x] HTML
 * [ ] Word
 * [ ] XLIFF
 
