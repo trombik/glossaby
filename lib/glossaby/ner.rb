@@ -1,47 +1,13 @@
 # frozen_string_literal: true
 
-require "glossaby"
-require "ruby-spacy"
 require "terminal-table"
-require "pathname"
-require "glossaby/preprocessor/markdown"
-require "glossaby/preprocessor/pdf"
-require "glossaby/preprocessor/html"
+require "glossaby/runner"
 
 module Glossaby
   # A class that implements extracting named entities with Named Entity
   # Recognition.
-  class NER
+  class NER < Runner
     IGNORED_LABELS = %w[CARDINAL DATE].freeze
-
-    def initialize(opts)
-      @file = Pathname opts[:args].first
-    end
-
-    def nlp
-      return @nlp if @nlp
-
-      @nlp = Spacy::Language.new("en_core_web_sm")
-    end
-
-    def preprocessor
-      return @preprocessor if @preprocessor
-
-      @preprocessor = case @file.extname
-                      when ".md"
-                        Glossaby::Preprocessor::Markdown.new(@file)
-                      when ".pdf"
-                        Glossaby::Preprocessor::PDF.new(@file)
-                      when ".html", ".htm"
-                        Glossaby::Preprocessor::HTML.new(@file)
-                      end
-    end
-
-    def doc
-      return @doc if @doc
-
-      @doc = nlp.read(preprocessor.process)
-    end
 
     def collect_keyword
       keyword = {}
