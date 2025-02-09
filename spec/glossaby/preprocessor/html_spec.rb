@@ -17,6 +17,7 @@ RSpec.describe Glossaby::Preprocessor::HTML do
         </ul>
         <code>Code</code>
         <pre>Pre</pre>
+        <pre><code>Code</code></pre>
       </body>
     </html>"
   end

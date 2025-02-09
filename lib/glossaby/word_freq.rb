@@ -22,6 +22,9 @@ module Glossaby
         next if token.is_stop
         next unless WHITE_LISTED_POS_TAGS.include? token.pos_
 
+        # reject a single character text
+        next if token.text.to_s.length <= 1
+
         lemma = token.lemma_
         pos = token.pos_
         sentence = token.sent.to_s
