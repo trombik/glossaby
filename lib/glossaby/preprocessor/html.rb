@@ -13,6 +13,7 @@ module Glossaby
         # it is rare for code blocks to contain meaningfully necessary terms and
         # the code pollutes glossary. ignore all the code blocks
         doc.at("code").remove
+        doc.at("pre").remove
         doc.text.gsub(/\s+/, " ")
       end
     end

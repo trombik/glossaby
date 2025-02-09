@@ -16,6 +16,7 @@ RSpec.describe Glossaby::Preprocessor::HTML do
           <li>Item1</li>
         </ul>
         <code>Code</code>
+        <pre>Pre</pre>
       </body>
     </html>"
   end
@@ -27,7 +28,7 @@ RSpec.describe Glossaby::Preprocessor::HTML do
   end
 
   describe "#process" do
-    it "renders plain text, removing <code>" do
+    it "renders plain text, removing <code> and <pre>" do
       allow(preprocessor).to receive(:read).and_return(content)
       expect(preprocessor.process).to eq " Title H1 H2 Item1 "
     end
