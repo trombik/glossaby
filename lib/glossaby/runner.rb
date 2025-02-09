@@ -18,6 +18,10 @@ module Glossaby
       return @nlp if @nlp
 
       @nlp = Spacy::Language.new("en_core_web_sm")
+
+      # XXX increase max_length to process a long text
+      @nlp.max_length = 1000000 * 2
+      @nlp
     end
 
     def preprocessor

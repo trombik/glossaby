@@ -19,8 +19,26 @@ module Glossaby
         c.syntax = "#{program :name} #{c.name} [file]"
         c.description = "Create a list of Named Entity"
         c.option "--filter STRING", String, "Filter name"
+        c.option "--format STRING", String, "Output format, json or csv"
         c.action do |args, options|
-          Glossaby::NER.new(args: args, options: options).run
+          options.default format: "csv"
+          glossary = Glossaby::NER.new(args: args, options: options).run
+          formatter = case options.format
+                      when "json"
+                        Glossaby::Formatter::JSON
+                      when "csv"
+                        Glossaby::Formatter::CSV
+                      end
+          puts formatter.new(glossary).format
+        end
+      end
+
+      command :word do |c|
+        c.syntax = "#{program :name} #{c.name} [file]"
+        c.action do |args, options|
+          glossary = Glossaby::WordFreq.new(args: args, options: options).run.sort { |a, b| b[:freq] <=> a[:freq] }
+          table = Terminal::Table.new :rows => glossary.map { |g| [ g[:lemma], g[:freq] ] }
+          puts table
         end
       end
 
