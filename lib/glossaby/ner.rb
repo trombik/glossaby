@@ -2,6 +2,7 @@
 
 require "terminal-table"
 require "glossaby/runner"
+require "json"
 
 module Glossaby
   # A class that implements extracting named entities with Named Entity
@@ -17,22 +18,14 @@ module Glossaby
         else
           next if IGNORED_LABELS.include? ent.label
 
-          keyword[ent.text] = { count: 1, label: ent.label }
+          keyword[ent.text] = { type: "ner", count: 1, label: ent.label }
         end
       end
       keyword
     end
 
     def run
-      rows = []
-      headings = %w[text label count]
-      keyword = collect_keyword
-      keyword.keys.map do |k|
-        v = keyword[k]
-        rows << [k, v[:label], v[:count]]
-      end
-      table = Terminal::Table.new rows: rows.sort { |a, b| b[2] <=> a[2] }, headings: headings
-      puts table
+      collect_keyword
     end
   end
 end

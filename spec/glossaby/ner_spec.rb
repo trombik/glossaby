@@ -12,7 +12,17 @@ RSpec.describe Glossaby::NER do
       allow(preprocessor).to receive(:process).and_return(content)
       allow(ner).to receive_messages(nlp: Spacy::Language.new("en_core_web_sm"), preprocessor: preprocessor)
 
-      expect(ner.collect_keyword).to eq({ "Ruby" => { count: 1, label: "PERSON" } })
+      expect(ner.collect_keyword).to eq({ "Ruby" => { type: "ner", count: 1, label: "PERSON" } })
+    end
+  end
+
+  describe "#filter" do
+    it "filters line break" do
+      preprocessor = instance_double(Glossaby::Preprocessor::Markdown)
+      allow(preprocessor).to receive(:process).and_return(content)
+      allow(ner).to receive_messages(nlp: Spacy::Language.new("en_core_web_sm"), preprocessor: preprocessor)
+
+      expect(ner.collect_keyword).to eq({ "Ruby" => { type: "ner", count: 1, label: "PERSON" } })
     end
   end
 end
