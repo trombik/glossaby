@@ -37,7 +37,7 @@ module Glossaby
         c.syntax = "#{program :name} #{c.name} [file]"
         c.action do |args, options|
           glossary = Glossaby::WordFreq.new(args: args, options: options).run.sort { |a, b| b[:freq] <=> a[:freq] }
-          table = Terminal::Table.new :rows => glossary.map { |g| [ g[:lemma], g[:freq] ] }
+          table = Terminal::Table.new :rows => glossary.map { |g| [ g[:lemma], g[:freq], g[:pos] ] }
           puts table
         end
       end
