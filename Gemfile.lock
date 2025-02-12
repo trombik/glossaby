@@ -16,6 +16,7 @@ GEM
     afm (0.2.2)
     ast (2.4.2)
     bigdecimal (3.1.9)
+    coderay (1.1.3)
     commander (5.0.0)
       highline (~> 3.0.0)
     date (3.4.1)
@@ -39,6 +40,7 @@ GEM
     json (2.9.1)
     language_server-protocol (3.17.0.3)
     logger (1.6.5)
+    method_source (1.1.0)
     mini_portile2 (2.8.8)
     multipart-post (2.4.1)
     net-http (0.6.0)
@@ -61,6 +63,9 @@ GEM
     pp (0.6.2)
       prettyprint
     prettyprint (0.2.0)
+    pry (0.15.2)
+      coderay (~> 1.1)
+      method_source (~> 1.0)
     psych (5.2.3)
       date
       stringio
@@ -127,6 +132,7 @@ PLATFORMS
 DEPENDENCIES
   glossaby!
   irb
+  pry
   rake (~> 13.0)
   rspec (~> 3.0)
   rubocop (~> 1.21)
