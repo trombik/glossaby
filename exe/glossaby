@@ -37,7 +37,17 @@ module Glossaby
         c.syntax = "#{program :name} #{c.name} [file]"
         c.action do |args, options|
           glossary = Glossaby::WordFreq.new(args: args, options: options).run.sort { |a, b| b[:freq] <=> a[:freq] }
-          table = Terminal::Table.new :rows => glossary.map { |g| [ g[:lemma], g[:freq], g[:pos] ] }
+          table = Terminal::Table.new rows: glossary.map { |g| [g[:lemma], g[:freq], g[:pos]] }
+          puts table
+        end
+      end
+
+      command :np do |c|
+        c.syntax = "#{program :name} #{c.name} [file]"
+        c.option "--filter-html-css STRING", String, "CSS selector to select part of HTML documents"
+        c.action do |args, options|
+          glossary = Glossaby::PhraseFreq.new(args: args, options: options).run.sort { |a, b| b[:count] <=> a[:count] }
+          table = Terminal::Table.new rows: glossary.map { |g| [g[:text], g[:count]] }
           puts table
         end
       end

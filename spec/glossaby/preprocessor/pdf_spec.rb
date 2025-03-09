@@ -3,7 +3,7 @@
 require "glossaby/preprocessor/pdf"
 
 RSpec.describe Glossaby::Preprocessor::PDF do
-  let(:preprocessor) { described_class.new("spec/data/normal.pdf") }
+  let(:preprocessor) { described_class.new("spec/data/normal.pdf", {}) }
   let(:content) do
     "Wondering why Ruby is so popular? Its fans call it a beautiful, artful language.And yet, they say it’s
 handy and practical. What gives?

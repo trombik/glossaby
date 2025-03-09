@@ -3,7 +3,7 @@
 require "glossaby/preprocessor/html"
 
 RSpec.describe Glossaby::Preprocessor::HTML do
-  let(:preprocessor) { described_class.new("/foo") }
+  let(:preprocessor) { described_class.new("/foo", {}) }
   let(:content) do
     "<html>
       <head>
@@ -31,7 +31,7 @@ RSpec.describe Glossaby::Preprocessor::HTML do
   describe "#process" do
     it "renders plain text, removing <code> and <pre>" do
       allow(preprocessor).to receive(:read).and_return(content)
-      expect(preprocessor.process).to eq " Title H1 H2 Item1 "
+      expect(preprocessor.process).to eq " H1 H2 Item1 "
     end
   end
 end

@@ -9,6 +9,7 @@ module Glossaby
     class HTML < Glossaby::Preprocessor::Base
       def process
         doc = Nokogiri::HTML(read)
+        doc = doc.at_css(opts[:css] || "body")
 
         # it is rare for code blocks to contain meaningfully necessary terms and
         # the code pollutes glossary. ignore all the code blocks

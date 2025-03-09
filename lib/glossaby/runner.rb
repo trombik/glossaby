@@ -12,6 +12,7 @@ module Glossaby
   class Runner
     def initialize(opts)
       @file = Pathname opts[:args].first
+      @opts = opts[:options]
     end
 
     def nlp
@@ -20,7 +21,7 @@ module Glossaby
       @nlp = Spacy::Language.new("en_core_web_sm")
 
       # XXX increase max_length to process a long text
-      @nlp.max_length = 1000000 * 2
+      @nlp.max_length = 1_000_000 * 2
       @nlp
     end
 
@@ -29,11 +30,14 @@ module Glossaby
 
       @preprocessor = case @file.extname
                       when ".md"
-                        Glossaby::Preprocessor::Markdown.new(@file)
+                        Glossaby::Preprocessor::Markdown.new(@file, @opts)
                       when ".pdf"
-                        Glossaby::Preprocessor::PDF.new(@file)
+                        Glossaby::Preprocessor::PDF.new(@file, @opts)
                       when ".html", ".htm"
-                        Glossaby::Preprocessor::HTML.new(@file)
+                        {
+                          css: @opts.filter_html_css
+                        }
+                        Glossaby::Preprocessor::HTML.new(@file, @opts)
                       end
     end
 

@@ -3,7 +3,7 @@
 require "glossaby/runner"
 
 RSpec.describe Glossaby::Runner do
-  let(:runner) { described_class.new(args: ["/foo.md"]) }
+  let(:runner) { described_class.new(args: ["/foo.md"], opts: {}) }
 
   describe "#new" do
     it "does not throw" do

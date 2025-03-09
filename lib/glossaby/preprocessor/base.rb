@@ -6,9 +6,12 @@ module Glossaby
   module Preprocessor
     # the base class for Glossaby::Preprocessor
     class Base
-      def initialize(file)
+      def initialize(file, opts)
         @file = Pathname(file)
+        @opts = opts
       end
+
+      attr_reader :opts
 
       def read
         File.read(@file.realpath)

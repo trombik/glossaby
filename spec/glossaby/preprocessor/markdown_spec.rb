@@ -3,7 +3,7 @@
 require "glossaby/preprocessor/markdown"
 
 RSpec.describe Glossaby::Preprocessor::Markdown do
-  let(:preprocessor) { described_class.new("/foo") }
+  let(:preprocessor) { described_class.new("/foo", {}) }
   let(:content) { "# foo\nbar\n" }
   let(:content_with_code_block) do
     "# foo
