@@ -124,6 +124,7 @@ GEM
       bigdecimal (~> 3.1)
     unicode-display_width (2.6.0)
     uri (1.0.2)
+    yard (0.9.37)
 
 PLATFORMS
   amd64-freebsd-15
@@ -137,6 +138,7 @@ DEPENDENCIES
   rspec (~> 3.0)
   rubocop (~> 1.21)
   rubocop-rspec (~> 3.3.0)
+  yard (~> 0.9.37)
 
 BUNDLED WITH
-   2.5.22
+   2.6.3
