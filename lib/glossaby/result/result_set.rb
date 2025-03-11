@@ -20,11 +20,11 @@ module Glossaby
       #
       def <<(element)
         index = find_by_name(element.name)
-        if index
+        if index.nil?
+          super
+        else
           self[index].count += 1
           self[index].contexts += element.contexts if element.contexts
-        else
-          super
         end
         self
       end
