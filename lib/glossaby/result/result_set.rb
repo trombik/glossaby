@@ -21,7 +21,7 @@ module Glossaby
       def <<(element)
         index = find_by_name(element.name)
         if index
-          self[index].freq += 1
+          self[index].count += 1
           self[index].contexts += element.contexts if element.contexts
         else
           super
@@ -57,8 +57,8 @@ module Glossaby
         !find_by_name(element.name).nil?
       end
 
-      def sort_by_freq
-        sort { |a, b| b.freq <=> a.freq }
+      def sort_by_count
+        sort { |a, b| b.count <=> a.count }
       end
 
       def sort_by_name

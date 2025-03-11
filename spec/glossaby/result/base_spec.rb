@@ -6,7 +6,7 @@ RSpec.describe Glossaby::Result::Base do
   subject(:base_result) do
     described_class.new(
       name: "foo",
-      freq: 2,
+      count: 2,
       context: context
     )
   end
@@ -24,8 +24,8 @@ RSpec.describe Glossaby::Result::Base do
       expect(result.name).to eq "foo"
     end
 
-    it "accepts freq as an argument" do
-      expect(base_result.freq).to eq 2
+    it "accepts count as an argument" do
+      expect(base_result.count).to eq 2
     end
   end
 

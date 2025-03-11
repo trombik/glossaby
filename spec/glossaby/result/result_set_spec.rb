@@ -19,7 +19,7 @@ RSpec.describe Glossaby::Result::ResultSet do
   let(:result_foo) do
     Glossaby::Result::Base.new(
       name: "foo",
-      freq: 1,
+      count: 1,
       context: "This is foo"
     )
   end
@@ -27,7 +27,7 @@ RSpec.describe Glossaby::Result::ResultSet do
   let(:result_bar) do
     Glossaby::Result::Base.new(
       name: "bar",
-      freq: 42,
+      count: 42,
       context: "It is bar"
     )
   end
@@ -35,7 +35,7 @@ RSpec.describe Glossaby::Result::ResultSet do
   let(:result_buz) do
     Glossaby::Result::Base.new(
       name: "buz",
-      freq: 5,
+      count: 5,
       context: "It is buz"
     )
   end
@@ -87,10 +87,10 @@ RSpec.describe Glossaby::Result::ResultSet do
         expect(result_set_default.length).to eq 2
       end
 
-      it "increments the term's freq by one" do
+      it "increments the term's count by one" do
         result_set_default << result_foo
         index = result_set_default.find_by_name(result_foo.name)
-        expect(result_set_default[index].freq).to eq 2
+        expect(result_set_default[index].count).to eq 2
       end
 
       it "adds new context to the term and the number of contexts is correct" do
@@ -114,9 +114,9 @@ RSpec.describe Glossaby::Result::ResultSet do
     end
   end
 
-  describe "#sort_by_freq" do
-    it "sorts by freq in descending order" do
-      expect(result_set_default.sort_by_freq.map(&:freq)).to eq [42, 1]
+  describe "#sort_by_count" do
+    it "sorts by count in descending order" do
+      expect(result_set_default.sort_by_count.map(&:count)).to eq [42, 1]
     end
   end
 
@@ -127,12 +127,12 @@ RSpec.describe Glossaby::Result::ResultSet do
   end
 
   describe "#merge" do
-    it "merges two result sets and each freq is incremented" do
-      expected_result = [result_foo.freq + 1, result_bar.freq + 1]
+    it "merges two result sets and each count is incremented" do
+      expected_result = [result_foo.count + 1, result_bar.count + 1]
       merged = result_set_default.merge(result_set_another)
       result = [
-        merged[merged.find_by_name(result_foo.name)].freq,
-        merged[merged.find_by_name(result_bar.name)].freq
+        merged[merged.find_by_name(result_foo.name)].count,
+        merged[merged.find_by_name(result_bar.name)].count
       ]
       expect(result).to eq expected_result
     end
