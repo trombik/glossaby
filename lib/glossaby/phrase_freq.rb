@@ -38,7 +38,7 @@ module Glossaby
     end
 
     def collect_phrases
-      noun_phrases = []
+      noun_phrases = Glossaby::Result::ResultSet.new
       doc.noun_chunks.each do |span|
         span = remove_articles(span)
 
@@ -46,15 +46,7 @@ module Glossaby
         next if single_word?(span)
 
         text = normalize_span_to_text(span)
-        found_np = noun_phrases.select { |np| np[:text] == text }.first
-        if found_np
-          found_np[:count] += 1
-        else
-          noun_phrases << {
-            text: text,
-            count: 1
-          }
-        end
+        noun_phrases << Glossaby::Result::Base.new(name: text, count: 1)
       end
       noun_phrases
     end

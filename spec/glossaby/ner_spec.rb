@@ -7,22 +7,22 @@ RSpec.describe Glossaby::NER do
   let(:content) { "What is Ruby?\n\nRuby is a computer language.\n" }
 
   describe "#collect_keyword" do
-    it "returns a hash of keywords" do
+    before do
       preprocessor = instance_double(Glossaby::Preprocessor::Markdown)
       allow(preprocessor).to receive(:process).and_return(content)
       allow(ner).to receive_messages(nlp: Spacy::Language.new("en_core_web_sm"), preprocessor: preprocessor)
-
-      expect(ner.collect_keyword).to eq({ "Ruby" => { type: "ner", count: 1, label: "PERSON" } })
     end
-  end
 
-  describe "#filter" do
-    it "filters line break" do
-      preprocessor = instance_double(Glossaby::Preprocessor::Markdown)
-      allow(preprocessor).to receive(:process).and_return(content)
-      allow(ner).to receive_messages(nlp: Spacy::Language.new("en_core_web_sm"), preprocessor: preprocessor)
+    it "contains `Ruby` as NER" do
+      keywords = ner.collect_keyword
 
-      expect(ner.collect_keyword).to eq({ "Ruby" => { type: "ner", count: 1, label: "PERSON" } })
+      expect(keywords[keywords.find_by_name("Ruby")].name).to eq "Ruby"
+    end
+
+    it "counts `Ruby` twice" do
+      keywords = ner.collect_keyword
+
+      expect(keywords[keywords.find_by_name("Ruby")].count).to eq 2
     end
   end
 end

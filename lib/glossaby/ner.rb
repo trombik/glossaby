@@ -2,6 +2,8 @@
 
 require "terminal-table"
 require "glossaby/runner"
+require "glossaby/result/base"
+require "glossaby/result/result_set"
 require "json"
 
 module Glossaby
@@ -11,17 +13,14 @@ module Glossaby
     IGNORED_LABELS = %w[CARDINAL DATE].freeze
 
     def collect_keyword
-      keyword = {}
+      keywords = Glossaby::Result::ResultSet.new
       doc.ents.each do |ent|
-        if keyword.key?(ent.text)
-          keyword[ent.text][:count] += 1
-        else
-          next if IGNORED_LABELS.include? ent.label
+        next if IGNORED_LABELS.include? ent.label
 
-          keyword[ent.text] = { type: "ner", count: 1, label: ent.label }
-        end
+        count = doc.tokens.map(&:lemma_).tally[ent.text]
+        keywords << Glossaby::Result::Base.new(name: ent.text, count: count)
       end
-      keyword
+      keywords
     end
 
     def run

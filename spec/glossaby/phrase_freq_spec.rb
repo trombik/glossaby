@@ -36,7 +36,7 @@ RSpec.describe Glossaby::PhraseFreq do
     end
 
     it "returns NPs" do
-      expect(runner.collect_phrases.map { |np| np[:text] }).to include(
+      expect(runner.collect_phrases.map(&:name)).to include(
         "software development",
         "factory automation",
         "remote satellite antenna"
@@ -44,38 +44,38 @@ RSpec.describe Glossaby::PhraseFreq do
     end
 
     it "does not contain single word NPs" do
-      expect(runner.collect_phrases.map { |np| np[:text] }).not_to include(
+      expect(runner.collect_phrases.map(&:name)).not_to include(
         "it",
         "you"
       )
     end
 
     it "does not contain 'an operating system'" do
-      expect(runner.collect_phrases.map { |np| np[:text] }).not_to include(
+      expect(runner.collect_phrases.map(&:name)).not_to include(
         "an operating system"
       )
     end
 
     it "removes 'that' from noun phrases" do
-      expect(runner.collect_phrases.map { |np| np[:text] }).to include(
+      expect(runner.collect_phrases.map(&:name)).to include(
         "operating system"
       )
     end
 
     it "contains a lowered phrase" do
-      expect(runner.collect_phrases.map { |np| np[:text] }).to include(
+      expect(runner.collect_phrases.map(&:name)).to include(
         "berkeley software distribution"
       )
     end
 
     it "does not reject a phrase with a verb" do
-      expect(runner.collect_phrases.map { |np| np[:text] }).to include(
+      expect(runner.collect_phrases.map(&:name)).to include(
         "managing director"
       )
     end
 
     it "does not reject a phrase with an adjective" do
-      expect(runner.collect_phrases.map { |np| np[:text] }).to include(
+      expect(runner.collect_phrases.map(&:name)).to include(
         "white cat"
       )
     end
