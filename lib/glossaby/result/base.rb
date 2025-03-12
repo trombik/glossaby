@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "json"
+
 module Glossaby
   module Result
     # A class that represents a term found in a document.
@@ -33,6 +35,20 @@ module Glossaby
         @count = args[:count]
         @contexts = [] << args[:context]
         @pos = args[:pos] || nil
+      end
+
+      # Returns a hash representation of the object.
+      # @return [Hash] The hash of the object
+      def to_hash
+        hash = {}
+        instance_variables.each {|var| hash[var.to_s.delete("@")] = instance_variable_get(var) }
+        hash
+      end
+
+      # Returns a JSON representation of the object.
+      # @return [String] The JSON of the object
+      def to_json
+        to_hash.to_json
       end
     end
   end

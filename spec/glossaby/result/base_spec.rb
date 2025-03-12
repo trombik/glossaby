@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "glossaby/result/base"
+require "json"
 
 RSpec.describe Glossaby::Result::Base do
   subject(:base_result) do
@@ -53,6 +54,26 @@ RSpec.describe Glossaby::Result::Base do
     it "has two elements after adding another context" do
       base_result.contexts << another_context
       expect(base_result.contexts.length).to eq 2
+    end
+  end
+
+  describe "#hash" do
+    let(:hash) { base_result.to_hash }
+
+    it "returns a Hash with correct attributes" do
+      expect(hash.keys.sort).to eq ["name", "count", "contexts", "pos"].sort
+    end
+
+    it "returns a Hash with correct attribute values" do
+      expect(hash["name"]).to eq "foo"
+    end
+  end
+
+  describe "#to_json" do
+    let(:json) { base_result.to_json }
+
+    it "returns a valid JSON" do
+      expect { JSON.parse(json) }.not_to raise_error
     end
   end
 end
