@@ -23,27 +23,17 @@ module Glossaby
     end
 
     def collect_keywords
-      keywords = []
+      keywords = Glossaby::Result::ResultSet.new
       doc.each do |token|
         next if unwanted?(token)
 
-        lemma = token.lemma_
-        pos = token.pos_
-        sentence = token.sent.to_s
-        keyword = keywords.select { |k| k[:lemma] == lemma && k[:pos] == pos }.first
-        if keyword
-          keyword[:freq] += 1
-          keyword[:sentence] << sentence
-        else
-          keywords << {
-            lemma: lemma,
-            pos: pos,
-            freq: 1,
-            sentence: [sentence]
-          }
-        end
+        element = Glossaby::Result::Base.new(
+          name: token.lemma_, count: 1,
+          context: token.sent.to_s, pos: token.pos
+        )
+        keywords << element
       end
-      keywords.select { |k| k[:freq] > 1 }
+      keywords
     end
 
     def run

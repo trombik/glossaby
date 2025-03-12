@@ -20,13 +20,14 @@ RSpec.describe Glossaby::WordFreq do
       end
 
       it "returns two 'like' as a verb" do
-        expect(keywords.select { |keyword| keyword[:lemma] == "like" && keyword[:pos] == "VERB" }.first[:freq]).to eq 2
+        result = keywords.select { |keyword| keyword.name == "like" && keyword.pos == "VERB" }
+        expect(result.first.count).to eq 2
       end
 
       it "returns 'like' as verb with the sentence that used 'like'" do
-        result = keywords.select { |keyword| keyword[:lemma] == "like" && keyword[:pos] == "VERB" }.first
+        result = keywords.select { |keyword| keyword.name == "like" && keyword.pos == "VERB" }.first
 
-        expect(result[:sentence]).to include("I like dogs.")
+        expect(result.contexts).to include("I like dogs.")
       end
     end
   end

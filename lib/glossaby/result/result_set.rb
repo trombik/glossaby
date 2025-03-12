@@ -19,7 +19,7 @@ module Glossaby
       # @param element [Glossaby::Result::Base] An object to append to.
       #
       def <<(element)
-        index = find_by_name(element.name)
+        index = find_by_name_and_pos(element.name, element.pos)
         if index.nil?
           super
         else
@@ -47,14 +47,15 @@ module Glossaby
       # found, returns nil.
       #
       def find_by_name(name)
-        each_index do |index|
-          return index if self[index].name == name
-        end
-        nil
+        find_index { |element| element.name == name }
+      end
+
+      def find_by_name_and_pos(name, pos)
+        find_index { |element| element.name == name && element.pos == pos }
       end
 
       def include?(element)
-        !find_by_name(element.name).nil?
+        !find_by_name_and_pos(element.name, element.pos).nil?
       end
 
       def sort_by_count

@@ -13,6 +13,9 @@ module Glossaby
       # @return [Array<String>] The frequency in documents
       attr_accessor :contexts
 
+      # @return [String] One of POS tags. See https://universaldependencies.org/u/pos/
+      attr_accessor :pos
+
       alias term name
 
       # The constructor.
@@ -21,6 +24,7 @@ module Glossaby
       # @option args [String] :name The term.
       # @option args [Integer] :count The occurance
       # @option args [String] :context The context in which the term appeared
+      # @option args [String] :pos Onr of POS tags.
       #
       # @example Example usage:
       #   obj = Glossaby::Result::Base.new(name: "foo", count: 1, context: "This is foo")
@@ -28,6 +32,7 @@ module Glossaby
         @name = args[:name]
         @count = args[:count]
         @contexts = [] << args[:context]
+        @pos = args[:pos] || nil
       end
     end
   end

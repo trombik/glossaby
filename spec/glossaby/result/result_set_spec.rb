@@ -40,6 +40,15 @@ RSpec.describe Glossaby::Result::ResultSet do
     )
   end
 
+  let(:result_with_pos) do
+    Glossaby::Result::Base.new(
+      name: "foo",
+      conunt: 1,
+      context: "With pos tag",
+      pos: "NOUN"
+    )
+  end
+
   describe "#new" do
     it "does not raise error" do
       expect { described_class.new }.not_to raise_error
@@ -110,6 +119,14 @@ RSpec.describe Glossaby::Result::ResultSet do
       it "increments its length by one" do
         result_set_default << result_buz
         expect(result_set_default.length).to eq 3
+      end
+    end
+
+    context "when given a result with pos tag" do
+      it "has two `foo` results" do
+        result_set_default << result_with_pos
+        result = result_set_default.select { |element| element.name == "foo" }
+        expect(result.length).to eq 2
       end
     end
   end

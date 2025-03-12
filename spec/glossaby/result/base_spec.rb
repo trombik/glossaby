@@ -11,6 +11,14 @@ RSpec.describe Glossaby::Result::Base do
     )
   end
 
+  let(:result_with_pos_tag) do
+    described_class.new(
+      name: "foo",
+      conunt: 1,
+      pos: "NOUN"
+    )
+  end
+
   let(:context) { "This is foo" }
   let(:another_context) { "In another context, it is foo" }
 
@@ -26,6 +34,10 @@ RSpec.describe Glossaby::Result::Base do
 
     it "accepts count as an argument" do
       expect(base_result.count).to eq 2
+    end
+
+    it "accepts pos as an argument" do
+      expect(result_with_pos_tag.pos).to eq "NOUN"
     end
   end
 
