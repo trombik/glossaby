@@ -65,6 +65,10 @@ module Glossaby
       def sort_by_name
         sort { |a, b| a.name <=> b.name }
       end
+
+      def sort_by_count_and_name
+        sort_by { |element| [element.count * -1, element.name] }
+      end
     end
   end
 end

@@ -162,4 +162,35 @@ RSpec.describe Glossaby::Result::ResultSet do
       expect(result).to eq [2, 2]
     end
   end
+
+  describe "#sort_by_count_and_name" do
+    let(:abc) do
+      Glossaby::Result::Base.new(
+        name: "abc",
+        count: 2,
+      )
+    end
+
+    let(:bcd) do
+      Glossaby::Result::Base.new(
+        name: "bcd",
+        count: 2,
+      )
+    end
+
+    let(:cde) do
+      Glossaby::Result::Base.new(
+        name: "cde",
+        count: 5,
+      )
+    end
+
+    it "sorts by count and name" do
+      result_set_for_sort = described_class.new
+      result_set_for_sort << abc << bcd << cde
+      result = result_set_for_sort.sort_by_count_and_name.map { |element| element.name }
+      expect(result).to eq ["cde", "abc", "bcd"]
+    end
+
+  end
 end
