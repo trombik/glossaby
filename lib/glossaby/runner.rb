@@ -6,6 +6,7 @@ require "ruby-spacy"
 require "glossaby/preprocessor/markdown"
 require "glossaby/preprocessor/pdf"
 require "glossaby/preprocessor/html"
+require "glossaby/preprocessor/docx"
 
 module Glossaby
   # A base runner class for sub commands
@@ -38,7 +39,12 @@ module Glossaby
                           css: @opts.filter_html_css
                         }
                         Glossaby::Preprocessor::HTML.new(@file, @opts)
+                      when ".docx"
+                        Glossaby::Preprocessor::Docx.new(@file, @opts)
                       end
+      raise "Unsupported file type %s (%s)", @file.extname, @file if @preprocessor.nil?
+
+      @preprocessor
     end
 
     def doc

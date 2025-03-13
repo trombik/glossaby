@@ -36,6 +36,7 @@ Gem::Specification.new do |spec|
 
   # Uncomment to register a new dependency of your gem
   spec.add_dependency "commander", "~> 5.0.0"
+  spec.add_dependency "docx", "~> 0.8.0"
   spec.add_dependency "nokogiri", "~> 1.18.2"
   spec.add_dependency "pdf-reader", "~> 2.13.0"
   spec.add_dependency "redcarpet", "~> 3.6.0"
