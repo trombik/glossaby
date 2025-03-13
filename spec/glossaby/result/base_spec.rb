@@ -61,7 +61,7 @@ RSpec.describe Glossaby::Result::Base do
     let(:hash) { base_result.to_hash }
 
     it "returns a Hash with correct attributes" do
-      expect(hash.keys.sort).to eq ["name", "count", "contexts", "pos"].sort
+      expect(hash.keys.sort).to eq %w[name count contexts pos].sort
     end
 
     it "returns a Hash with correct attribute values" do
