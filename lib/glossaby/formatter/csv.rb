@@ -12,11 +12,8 @@ module Glossaby
 
       def format
         ::CSV.generate do |csv|
-          @data.each_key
-               .map { |key| [key, "", @data[key][:count]] }
-               .sort { |a, b| b[2] <=> a[2] }
-               .each do |row|
-            csv << row
+          @data.each do |element|
+            csv << [element.count, element.name, element.contexts&.join("\n")]
           end
         end
       end

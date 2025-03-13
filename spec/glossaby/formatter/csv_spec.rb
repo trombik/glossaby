@@ -4,16 +4,16 @@ require "glossaby/formatter/csv"
 
 RSpec.describe Glossaby::Formatter::CSV do
   let(:data) do
-    {
-      "foo" => {
+    Glossaby::Result::ResultSet.new <<
+      Glossaby::Result::Base.new(
+        name: "foo",
         count: 3,
-        type: "ner",
-        label: "PERSON"
-      }
-    }
+        context: "It is foo",
+        pos: "NOUN"
+      )
   end
 
-  let(:csv) { "foo,\"\",3\n" }
+  let(:csv) { "3,foo,It is foo\n" }
 
   describe "#new" do
     it "does not throw" do

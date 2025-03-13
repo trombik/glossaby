@@ -4,13 +4,23 @@ require "glossaby/formatter/json"
 
 RSpec.describe Glossaby::Formatter::JSON do
   let(:glossary) do
-    {
-      "foo" => {
+    Glossaby::Result::ResultSet.new << Glossaby::Result::Base.new(
+      name: "foo",
+      count: 3,
+      pos: "NOUN",
+      context: "It is foo"
+    )
+  end
+
+  let(:glossary_json) do
+    [
+      {
+        name: "foo",
         count: 3,
-        type: "ner",
-        label: "PERSON"
+        pos: "NOUN",
+        contexts: ["It is foo"]
       }
-    }
+    ].to_json
   end
 
   describe "#new" do
@@ -21,7 +31,10 @@ RSpec.describe Glossaby::Formatter::JSON do
 
   describe "#format" do
     it "returns json" do
-      expect(described_class.new(glossary).format).to eq glossary.to_json
+      result = JSON.parse(described_class.new(glossary).format)
+      expected = JSON.parse(glossary_json)
+
+      expect(result).to eq expected
     end
   end
 end

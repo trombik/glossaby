@@ -11,7 +11,7 @@ module Glossaby
       end
 
       def format
-        @data.to_json
+        @data.map(&:to_hash).to_json
       end
     end
   end
