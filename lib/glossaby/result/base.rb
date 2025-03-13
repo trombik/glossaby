@@ -31,9 +31,11 @@ module Glossaby
       # @example Example usage:
       #   obj = Glossaby::Result::Base.new(name: "foo", count: 1, context: "This is foo")
       def initialize(**args)
+        raise ArgumentError, ":name is required" if args[:name].nil
+
         @name = args[:name]
-        @count = args[:count]
-        @contexts = [] << args[:context]
+        @count = args[:count] || 1
+        @contexts = [] << args[:context] unless args[:context].nil?
         @pos = args[:pos] || nil
       end
 
@@ -41,14 +43,14 @@ module Glossaby
       # @return [Hash] The hash of the object
       def to_hash
         hash = {}
-        instance_variables.each {|var| hash[var.to_s.delete("@")] = instance_variable_get(var) }
+        instance_variables.each { |var| hash[var.to_s.delete("@")] = instance_variable_get(var) }
         hash
       end
 
       # Returns a JSON representation of the object.
       # @return [String] The JSON of the object
-      def to_json
-        to_hash.to_json
+      def to_json(*args)
+        to_hash.to_json(*args)
       end
     end
   end
