@@ -31,7 +31,7 @@ module Glossaby
       # @example Example usage:
       #   obj = Glossaby::Result::Base.new(name: "foo", count: 1, context: "This is foo")
       def initialize(**args)
-        raise ArgumentError, ":name is required" if args[:name].nil
+        raise ArgumentError, ":name is required" if args[:name].nil?
 
         @name = args[:name]
         @count = args[:count] || 1
