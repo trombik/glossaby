@@ -40,6 +40,14 @@ RSpec.describe Glossaby::Result::Base do
     it "accepts pos as an argument" do
       expect(result_with_pos_tag.pos).to eq "NOUN"
     end
+
+    context "when the context has multiple spaces and line breaks" do
+      let(:context) { "foo \nbar \tbuz." }
+
+      it "replaces spaces and line breaks" do
+        expect(base_result.contexts.first).to eq "foo bar buz."
+      end
+    end
   end
 
   describe "#contexts" do

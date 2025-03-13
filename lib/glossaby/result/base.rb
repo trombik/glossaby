@@ -35,7 +35,7 @@ module Glossaby
 
         @name = args[:name]
         @count = args[:count] || 1
-        @contexts = [] << args[:context] unless args[:context].nil?
+        @contexts = [] << normalize_text(args[:context]) unless args[:context].nil?
         @pos = args[:pos] || nil
       end
 
@@ -51,6 +51,21 @@ module Glossaby
       # @return [String] The JSON of the object
       def to_json(*args)
         to_hash.to_json(*args)
+      end
+
+      private
+
+      def normalize_text(text)
+        text = replace_line_breaks(text)
+        replace_spaces(text)
+      end
+
+      def replace_line_breaks(text)
+        text.gsub("\n", " ")
+      end
+
+      def replace_spaces(text)
+        text.gsub(/\s+/, " ")
       end
     end
   end
