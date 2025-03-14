@@ -9,6 +9,10 @@ OS=`uname -s`
 
 if [ "${OS}" = "FreeBSD" ]; then
     sudo pkg install textproc/py-spacy science/py-scikit-learn textproc/py-spacy-llm
+else
+    echo "The OS, ${OS} is not supported in development."
+    echo "Install required packages by following the instructions at"
+    echo "https://github.com/yohasebe/ruby-spacy"
 fi
 
 python -m spacy download "en_core_web_sm"
