@@ -14,8 +14,11 @@ jobs:
     name: Ruby ${{ matrix.ruby }}
     strategy:
       matrix:
+        # see https://www.ruby-lang.org/en/downloads/ for stable versions
         ruby:
-          - "3.2.5"
+          - "3.4"
+          - "3.3"
+          - "3.2"
 
     steps:
       - uses: actions/checkout@v4
