@@ -21,11 +21,24 @@ jobs:
           - "3.2"
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout the repo
+        uses: actions/checkout@v4
+
+      - name: Install Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: 3.11
+
+      - name: Install spacy
+        run: |
+          pip install spacy
+          python -m spacy download en_core_web_sm
+
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ matrix.ruby }}
           bundler-cache: true
+
       - name: Run the default task
         run: bundle exec rake
